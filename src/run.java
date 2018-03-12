@@ -12,9 +12,11 @@ public class run {
         // create Junctions
         NorthJunction northJunction = new NorthJunction("North", northEast, southEast, southWest);
         SouthJunction southJunction = new SouthJunction("South", northEast, northWest, southWest);
+        EastJunction eastJunction = new EastJunction("East", northWest, southEast, southWest);
 
         northJunction.start();
         southJunction.start();
+        eastJunction.start();
 
     }
 }
