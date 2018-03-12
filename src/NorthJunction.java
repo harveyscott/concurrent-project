@@ -4,7 +4,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class NorthJunction extends Thread implements IJunction {
 
-    //Semphores that represent the needed tiles
+    //Semaphores that represent the needed tiles
     Semaphore pNorthEast;
     Semaphore pSouthEast;
     Semaphore pSouthWest;
@@ -51,6 +51,7 @@ public class NorthJunction extends Thread implements IJunction {
             case 2: direction = Direction.SOUTH;
             break;
             case 3: direction = Direction.WEST;
+            break;
             default: direction = Direction.EAST;
             break;
         }
@@ -89,6 +90,7 @@ public class NorthJunction extends Thread implements IJunction {
         car.setArrived(true);
         car.setWaiting(false);
         car.setInProgress(false);
+        System.out.println(getName() + ": SUCCESS: " + car.getName() + " from NORTH has successfully got to its desired location");
 
         carsList.remove(car);
         // release the needed semaphores
@@ -102,6 +104,7 @@ public class NorthJunction extends Thread implements IJunction {
                 carsList.get(i).setWaiting(false);
                 decideDirection();
                 carsList.get(i).setDestination(direction);
+                System.out.println(getName() + ": " + carsList.get(i).getName() + " from NORTH has chosen to go " + carsList.get(i).getDestination());
 
                 // Enter critical section
                 try {
@@ -109,7 +112,7 @@ public class NorthJunction extends Thread implements IJunction {
                 } catch (InterruptedException e) {
                     System.out.println("Car could not get needed semaphores :(");
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(300);
                     } catch (InterruptedException e1) {
                         e1.printStackTrace();
                     }
@@ -122,8 +125,6 @@ public class NorthJunction extends Thread implements IJunction {
                     semaphore.release();
                 }
                 currentlyHeldSemaphores.clear();
-                System.out.println("Car has successfully got to its desired location");
-
             }
 
         }

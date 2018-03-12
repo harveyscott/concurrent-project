@@ -31,6 +31,10 @@ public class Cars {
         return destination;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setInProgress(boolean inProgress) {
         this.inProgress = inProgress;
     }
