@@ -101,9 +101,6 @@ public class WestJunction extends Thread implements IJunction {
 
     @Override
     public void drive(Cars car) {
-        car.setArrived(true);
-        car.setWaiting(false);
-        car.setInProgress(false);
 
         switch (car.getDestination()) {
             case NORTH:
@@ -143,8 +140,6 @@ public class WestJunction extends Thread implements IJunction {
         while (!carsList.isEmpty()) {
             for (int i = 0; i < carsList.size(); i++) {
                 passed = false;
-                carsList.get(i).setInProgress(true);
-                carsList.get(i).setWaiting(false);
 
                 decideDirection();
                 carsList.get(i).setDestination(direction);

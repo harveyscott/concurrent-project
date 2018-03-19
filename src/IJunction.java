@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public interface IJunction {
     public void decideDirection();
     public void getNeededTiles(Direction direction) throws InterruptedException;

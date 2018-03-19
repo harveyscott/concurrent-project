@@ -125,9 +125,6 @@ public class NorthJunction extends Thread implements IJunction {
     @Override
     public void drive(Cars car) {
         // Assumes that the semaphores could be acquired
-        car.setArrived(true);
-        car.setWaiting(false);
-        car.setInProgress(false);
 
         switch (car.getDestination()) {
             case EAST:
@@ -156,8 +153,6 @@ public class NorthJunction extends Thread implements IJunction {
             for (int i = 0; i < carsList.size(); i++) {
                 Cars aCarsList = carsList.get(i);
                 passed = false;
-                aCarsList.setInProgress(true);
-                aCarsList.setWaiting(false);
 
 
                 decideDirection();

@@ -45,7 +45,6 @@ public class EastJunction extends Thread implements IJunction {
         switch (direction) {
             case SOUTH:
                 if (pSouthEast.tryAcquire()) {
-                    System.out.println(getName() + ": Just acquired a semaphore pSouthEast");
                     passed = true;
                     currentlyHeldSemaphores.add(pSouthEast);
                 }
@@ -101,9 +100,6 @@ public class EastJunction extends Thread implements IJunction {
 
     @Override
     public void drive(Cars car) {
-        car.setArrived(true);
-        car.setWaiting(false);
-        car.setInProgress(false);
 
         // Print out car movements
         switch (car.getDestination()) {
@@ -143,8 +139,6 @@ public class EastJunction extends Thread implements IJunction {
         while (!carsList.isEmpty()) {
             for (int i = 0; i < carsList.size(); i++) {
                 passed = false;
-                carsList.get(i).setInProgress(true);
-                carsList.get(i).setWaiting(false);
 
                 //decides direction
                 decideDirection();
