@@ -13,11 +13,14 @@ public class EastJunction extends Thread implements IJunction {
     ArrayList<Cars> carsList = new ArrayList<>();
     boolean passed = false;
 
-    public EastJunction(String name, Semaphore northWest, Semaphore southEast, Semaphore southWest) {
+    Semaphore pCarsInIntersection;
+
+    public EastJunction(String name, Semaphore northWest, Semaphore southEast, Semaphore southWest, Semaphore carsInIntersection) {
         super(name);
         pNorthWest = northWest;
         pSouthEast = southEast;
         pSouthWest = southWest;
+        pCarsInIntersection = carsInIntersection;
         createCars();
     }
 
@@ -41,92 +44,57 @@ public class EastJunction extends Thread implements IJunction {
         int randomWait = ThreadLocalRandom.current().nextInt(100,2000);
         switch (direction) {
             case SOUTH:
-
-                    if (pSouthEast.tryAcquire()) {
-                        System.out.println(getName() + ": Just acquired a semaphore pSouthEast");
-                        passed = true;
-                        currentlyHeldSemaphores.add(pSouthEast);
-                    }
-
+                if (pSouthEast.tryAcquire()) {
+                    System.out.println(getName() + ": Just acquired a semaphore pSouthEast");
+                    passed = true;
+                    currentlyHeldSemaphores.add(pSouthEast);
+                }
 
                 if (!passed) {
                     Thread.sleep(randomWait);
                 }
-                // make a boolean to store if it has passed or not
                 // needs to acquire southEast
                 break;
             case WEST:
-                    if (pSouthEast.tryAcquire()) {
-                        System.out.println(getName() + ": Just acquired a semaphore pSouthEast");
-                    } else {
-                        System.out.println("This was triggered");
-                        //Thread.sleep(randomWait);
-                    }
+                if (pSouthEast.tryAcquire()) {
+                }
 
-                    if (pSouthWest.tryAcquire()) {
-                        System.out.println(getName() + ": Just acquired a semaphore pSouthWest");
-                        passed = true;
-                        currentlyHeldSemaphores.add(pSouthEast);
-                        currentlyHeldSemaphores.add(pSouthWest);
-                    } else {
-                        System.out.println("This was triggered");
-                        pSouthEast.release();
-                        System.out.println(getName() + ": Just released semaphore pSouthEast");
-                        //Thread.sleep(randomWait);
-                    }
+                if (pSouthWest.tryAcquire()) {
+                    passed = true;
+                    currentlyHeldSemaphores.add(pSouthEast);
+                    currentlyHeldSemaphores.add(pSouthWest);
+                } else {
+                    pSouthEast.release();
+                }
 
 
                 if (!passed) {
                     Thread.sleep(randomWait);
                 }
                 // needs to acquire southEast southWest
-//                pSouthEast.acquire();
-//                pSouthWest.acquire();
-//                currentlyHeldSemaphores.add(pSouthEast);
-//                currentlyHeldSemaphores.add(pSouthWest);
                 break;
             case NORTH:
+                if (pSouthEast.tryAcquire()) {
+                }
 
-                    if (pSouthEast.tryAcquire()) {
-                        System.out.println(getName() + ": Just acquired a semaphore pSouthEast");
-                    } else {
-                        System.out.println("This was triggered");
-                        //Thread.sleep(randomWait);
-                    }
+                if (pSouthWest.tryAcquire()) {
+                } else {
+                    pSouthEast.release();
+                }
 
-                    if (pSouthWest.tryAcquire()) {
-                        System.out.println(getName() + ": Just acquired a semaphore pSouthWest");
-                    } else {
-                        System.out.println("This was triggered");
-                        pSouthEast.release();
-                        System.out.println(getName() + ": Just released semaphore pSouthEast");
-                        //Thread.sleep(randomWait);
-                    }
-
-                    if (pNorthWest.tryAcquire()) {
-                        System.out.println(getName() + ": Just acquired a semaphore pNorthWest");
-                        passed = true;
-                        currentlyHeldSemaphores.add(pSouthEast);
-                        currentlyHeldSemaphores.add(pSouthWest);
-                        currentlyHeldSemaphores.add(pNorthWest);
-                    } else {
-                        System.out.println("This was triggered");
-                        pSouthEast.release();
-                        System.out.println(getName() + ": Just released semaphore pSouthEast");
-                        pSouthWest.release();
-                        System.out.println(getName() + ": Just released semaphore pSouthWest");
-                        //Thread.sleep(randomWait);
-                    }
+                if (pNorthWest.tryAcquire()) {
+                    passed = true;
+                    currentlyHeldSemaphores.add(pSouthEast);
+                    currentlyHeldSemaphores.add(pSouthWest);
+                    currentlyHeldSemaphores.add(pNorthWest);
+                } else {
+                    pSouthEast.release();
+                    pSouthWest.release();
+                }
 
                 if (!passed) {
                     Thread.sleep(randomWait);
                 }
-//                pSouthEast.acquire();
-//                pSouthWest.acquire();
-//                pNorthWest.acquire();
-//                currentlyHeldSemaphores.add(pSouthEast);
-//                currentlyHeldSemaphores.add(pSouthWest);
-//                currentlyHeldSemaphores.add(pNorthWest);
                 break;
         }
     }
@@ -136,7 +104,24 @@ public class EastJunction extends Thread implements IJunction {
         car.setArrived(true);
         car.setWaiting(false);
         car.setInProgress(false);
-        System.out.println(getName() + ": SUCCESS:" + car.getName() + " from EAST has successfully got to its desired location");
+
+        // Print out car movements
+        switch (car.getDestination()) {
+            case SOUTH:
+                System.out.println("Car from " + getName() + " has entered tile number 8");
+                break;
+            case WEST:
+                System.out.println("Car from " + getName() + " has entered tile number 8");
+                System.out.println("Car from " + getName() + " has entered tile number 7");
+                break;
+            case NORTH:
+                System.out.println("Car from " + getName() + " has entered tile number 8");
+                System.out.println("Car from " + getName() + " has entered tile number 7");
+                System.out.println("Car from " + getName() + " has entered tile number 3");
+                break;
+        }
+
+        System.out.println(getName() + ": SUCCESS: " + car.getName() + " from EAST has successfully got to its desired location");
         carsList.remove(car);
     }
 
@@ -161,26 +146,35 @@ public class EastJunction extends Thread implements IJunction {
                 carsList.get(i).setInProgress(true);
                 carsList.get(i).setWaiting(false);
 
+                //decides direction
+                decideDirection();
+                carsList.get(i).setDestination(direction);
+                System.out.println(getName() + ": " + carsList.get(i).getName() + " from EAST has chosen to go " + carsList.get(i).getDestination());
+
                 while (!passed) {
-                    decideDirection();
-                    carsList.get(i).setDestination(direction);
-                    System.out.println(getName() + ": " + carsList.get(i).getName() + " from EAST has chosen to go " + carsList.get(i).getDestination());
-                    try {
-                        getNeededTiles(carsList.get(i).getDestination());
-                    } catch (InterruptedException e) {
-                        System.out.println("Car could not get needed semaphores :(");
+                    // car tries to enter intersection
+                    if (pCarsInIntersection.tryAcquire()) {
+                        System.out.println(getName() + ": has acquired entrance to the intersection. Cars that can enter = " + pCarsInIntersection.availablePermits());
+
+                        // acquires needed semaphores
                         try {
-                            Thread.sleep(300);
-                        } catch (InterruptedException e1) {
-                            e1.printStackTrace();
+                            getNeededTiles(carsList.get(i).getDestination());
+                        } catch (InterruptedException e) {
+                            System.out.println("Car could not get needed semaphores");
+                            try {
+                                Thread.sleep(300);
+                            } catch (InterruptedException e1) {
+                                e1.printStackTrace();
+                            }
                         }
-                        continue;
                     }
                 }
 
                 drive(carsList.get(i));
-                for (Semaphore semaphore: currentlyHeldSemaphores
-                        ) {
+
+                // car leaves the intersection
+                pCarsInIntersection.release();
+                for (Semaphore semaphore: currentlyHeldSemaphores) {
                     semaphore.release();
                 }
                 currentlyHeldSemaphores.clear();
