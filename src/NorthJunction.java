@@ -31,16 +31,16 @@ public class NorthJunction extends Thread implements IJunction {
     // Create a list of the cars waiting cars
     @Override
     public void createCars() {
-        carsList.add(new Cars("Car 1", Direction.NORTH));
-        carsList.add(new Cars("Car 2", Direction.NORTH));
-        carsList.add(new Cars("Car 3", Direction.NORTH));
-        carsList.add(new Cars("Car 4", Direction.NORTH));
-        carsList.add(new Cars("Car 5", Direction.NORTH));
-        carsList.add(new Cars("Car 6", Direction.NORTH));
-        carsList.add(new Cars("Car 7", Direction.NORTH));
-        carsList.add(new Cars("Car 8", Direction.NORTH));
-        carsList.add(new Cars("Car 9", Direction.NORTH));
-        carsList.add(new Cars("Car 10", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
+        carsList.add(new Cars("Car", Direction.NORTH));
     }
 
 

@@ -124,16 +124,16 @@ public class WestJunction extends Thread implements IJunction {
 
     @Override
     public void createCars() {
-        carsList.add(new Cars("Car 1", Direction.WEST));
-        carsList.add(new Cars("Car 2", Direction.WEST));
-        carsList.add(new Cars("Car 3", Direction.WEST));
-        carsList.add(new Cars("Car 4", Direction.WEST));
-        carsList.add(new Cars("Car 5", Direction.WEST));
-        carsList.add(new Cars("Car 6", Direction.WEST));
-        carsList.add(new Cars("Car 7", Direction.WEST));
-        carsList.add(new Cars("Car 8", Direction.WEST));
-        carsList.add(new Cars("Car 9", Direction.WEST));
-        carsList.add(new Cars("Car 10", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
+        carsList.add(new Cars("Car", Direction.WEST));
     }
 
     public void run() {

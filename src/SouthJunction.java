@@ -121,16 +121,16 @@ public class SouthJunction extends Thread implements IJunction {
 
     @Override
     public void createCars() {
-        carsList.add(new Cars("Car 1", Direction.SOUTH));
-        carsList.add(new Cars("Car 2", Direction.SOUTH));
-        carsList.add(new Cars("Car 3", Direction.SOUTH));
-        carsList.add(new Cars("Car 4", Direction.SOUTH));
-        carsList.add(new Cars("Car 5", Direction.SOUTH));
-        carsList.add(new Cars("Car 6", Direction.SOUTH));
-        carsList.add(new Cars("Car 7", Direction.SOUTH));
-        carsList.add(new Cars("Car 8", Direction.SOUTH));
-        carsList.add(new Cars("Car 9", Direction.SOUTH));
-        carsList.add(new Cars("Car 10", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
+        carsList.add(new Cars("Car", Direction.SOUTH));
     }
 
     public void run() {

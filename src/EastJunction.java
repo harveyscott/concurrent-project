@@ -123,16 +123,16 @@ public class EastJunction extends Thread implements IJunction {
 
     @Override
     public void createCars() {
-        carsList.add(new Cars("Car 1", Direction.EAST));
-        carsList.add(new Cars("Car 2", Direction.EAST));
-        carsList.add(new Cars("Car 3", Direction.EAST));
-        carsList.add(new Cars("Car 4", Direction.EAST));
-        carsList.add(new Cars("Car 5", Direction.EAST));
-        carsList.add(new Cars("Car 6", Direction.EAST));
-        carsList.add(new Cars("Car 7", Direction.EAST));
-        carsList.add(new Cars("Car 8", Direction.EAST));
-        carsList.add(new Cars("Car 9", Direction.EAST));
-        carsList.add(new Cars("Car 10", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
+        carsList.add(new Cars("Car", Direction.EAST));
     }
 
     public void run() {
